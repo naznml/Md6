@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6-сайт | Үлгілік бағдарлама және ата-аналарды тарту</title>
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --paper:#ffffff;
+      --ink:#1d2433;
+      --muted:#647084;
+      --line:rgba(45,62,95,.14);
+      --accent:#4667c8;
+      --accent2:#6b4fc8;
+      --accent3:#2f8f7a;
+      --soft:#eef3ff;
+      --soft2:#f2ecff;
+      --good:#2f8f7a;
+      --bad:#c44949;
+      --shadow:0 22px 60px rgba(31,45,76,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter,"Segoe UI",Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left,rgba(70,103,200,.16),transparent 34%),
+        radial-gradient(circle at top right,rgba(107,79,200,.14),transparent 32%),
+        linear-gradient(180deg,#fbfcff 0%,#f5f7fb 55%,#edf1fa 100%);
+      line-height:1.65;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(1180px,calc(100% - 28px));margin:0 auto}
+
+    .top{padding:18px 0 8px}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 14px 12px 18px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.76);
+      backdrop-filter:blur(16px);
+      box-shadow:0 12px 34px rgba(31,45,76,.08);
+    }
+
+    .brand-left{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:white;
+      font-weight:950;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+    }
+
+    .brand-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+
+    .tag{
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#f7f9ff;
+      color:#4c5f8b;
+      font-size:13px;
+      font-weight:850;
+      white-space:nowrap;
+    }
+
+    .hero{
+      margin:18px 0 24px;
+      padding:clamp(28px,4.8vw,58px);
+      border:1px solid var(--line);
+      border-radius:36px;
+      background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(239,244,255,.95));
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute;
+      width:330px;
+      height:330px;
+      right:-120px;
+      top:-120px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(70,103,200,.23),transparent 68%);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#eef3ff;
+      color:#4667c8;
+      font-size:13px;
+      font-weight:950;
+      margin-bottom:16px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(33px,5.2vw,62px);
+      line-height:1.04;
+      letter-spacing:-.06em;
+    }
+
+    .hero p{
+      margin:18px 0 0;
+      max-width:820px;
+      color:var(--muted);
+      font-size:clamp(16px,2vw,19px);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+    }
+
+    .pill-link{
+      display:inline-flex;
+      padding:11px 16px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      font-weight:950;
+    }
+
+    .pill-link.secondary{
+      background:#f2ecff;
+      color:#5d45a9;
+      border:1px solid rgba(107,79,200,.20);
+    }
+
+    .hero-panel{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:rgba(255,255,255,.83);
+      padding:18px;
+    }
+
+    .stat{
+      display:grid;
+      grid-template-columns:58px 1fr;
+      gap:13px;
+      padding:12px 0;
+      border-bottom:1px solid var(--line);
+      align-items:center;
+    }
+
+    .stat:last-child{border-bottom:0}
+
+    .stat-num{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:#eef3ff;
+      color:var(--accent);
+      font-weight:950;
+      font-size:22px;
+    }
+
+    .stat strong{display:block;line-height:1.25;font-size:15px}
+    .stat span{display:block;margin-top:3px;color:var(--muted);line-height:1.35;font-size:13px}
+
+    .section{margin:26px 0}
+    .section-title{margin:0;font-size:clamp(25px,3vw,38px);line-height:1.1;letter-spacing:-.04em}
+    .section-subtitle{margin:8px 0 16px;color:var(--muted);max-width:780px}
+
+    .source-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .source-card{
+      min-height:240px;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:rgba(255,255,255,.88);
+      box-shadow:0 16px 44px rgba(31,45,76,.08);
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .badge{
+      display:inline-flex;
+      width:fit-content;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#eef3ff;
+      color:#4667c8;
+      font-size:12px;
+      font-weight:950;
+      margin-bottom:14px;
+    }
+
+    .source-card h3{
+      margin:0 0 12px;
+      font-size:24px;
+      line-height:1.16;
+      letter-spacing:-.03em;
+    }
+
+    .source-card p{margin:0;color:var(--muted);font-size:14.5px}
+
+    .source-bottom{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:var(--accent);
+      font-weight:950;
+      font-size:14px;
+      margin-top:18px;
+    }
+
+    .arrow{
+      width:35px;
+      height:35px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#eef3ff;
+    }
+
+    .study{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:18px;
+      align-items:start;
+      margin-top:26px;
+    }
+
+    .side{
+      position:sticky;
+      top:12px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(255,255,255,.78);
+      box-shadow:0 18px 44px rgba(31,45,76,.08);
+    }
+
+    .side-title{margin:6px 8px 12px;font-weight:950;font-size:14px}
+
+    .side a{
+      display:block;
+      padding:10px 11px;
+      border-radius:14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.32;
+      font-weight:850;
+    }
+
+    .side a:hover{background:#eef3ff;color:#4667c8}
+
+    .card{
+      margin-bottom:18px;
+      padding:clamp(20px,3vw,32px);
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:rgba(255,255,255,.86);
+      box-shadow:0 18px 46px rgba(31,45,76,.08);
+    }
+
+    .source-title{
+      margin-bottom:22px;
+      padding:24px;
+      border:1px solid rgba(70,103,200,.22);
+      border-radius:30px;
+      background:linear-gradient(135deg,#ffffff,#eef3ff);
+    }
+
+    .source-title h2{
+      margin:0;
+      font-size:clamp(27px,3.5vw,44px);
+      line-height:1.12;
+      letter-spacing:-.045em;
+    }
+
+    .source-title p{margin:10px 0 0;color:var(--muted);max-width:900px}
+
+    .part-title{
+      margin:0 0 14px;
+      padding:16px 18px;
+      border-radius:20px;
+      background:#1d2433;
+      color:#fff;
+      font-size:clamp(22px,2.8vw,34px);
+      line-height:1.18;
+      letter-spacing:-.035em;
+    }
+
+    .lead{font-size:17px;color:var(--muted);max-width:920px}
+
+    .topic-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .topic{
+      padding:15px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fbfcff;
+    }
+
+    .topic strong{display:block;margin-bottom:5px}
+    .topic span{display:block;color:var(--muted);font-size:14px;line-height:1.45}
+
+    .test-box{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid rgba(70,103,200,.22);
+      border-radius:24px;
+      background:linear-gradient(180deg,rgba(251,252,255,.96),rgba(255,255,255,.82));
+    }
+
+    .question{
+      margin-bottom:14px;
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.94);
+    }
+
+    .q-title{margin-bottom:12px;font-weight:950}
+    .options{display:grid;gap:8px}
+
+    .option{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:10px 11px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#ffffff;
+      color:#354052;
+      cursor:pointer;
+      font-size:14.5px;
+    }
+
+    .option:hover{border-color:rgba(70,103,200,.42);background:#eef3ff}
+    .option input{margin-top:4px;accent-color:var(--accent)}
+
+    .explanation{
+      display:none;
+      margin-top:12px;
+      padding:12px 13px;
+      border-radius:14px;
+      background:#eef3ff;
+      color:#334f9f;
+      font-size:14px;
+    }
+
+    .question.checked .explanation{display:block}
+    .question.correct{border-color:rgba(47,143,122,.45);background:rgba(235,249,245,.72)}
+    .question.wrong{border-color:rgba(196,73,73,.42);background:rgba(255,239,239,.72)}
+
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding:12px 18px;
+      font-family:inherit;
+      font-weight:950;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+    }
+
+    .btn.secondary{
+      color:#4667c8;
+      background:#eef3ff;
+      border:1px solid rgba(70,103,200,.22);
+    }
+
+    .score{
+      display:none;
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#eef3ff;
+      color:#334f9f;
+      font-weight:950;
+    }
+
+    .copyright{
+      margin-top:18px;
+      padding:15px 17px;
+      border-radius:18px;
+      background:#f2ecff;
+      color:#5d45a9;
+      border:1px solid rgba(107,79,200,.22);
+    }
+
+    @media(max-width:980px){
+      .hero-inner,.study{grid-template-columns:1fr}
+      .side{position:relative;top:auto}
+    }
+
+    @media(max-width:680px){
+      .wrap{width:min(100% - 18px,1180px)}
+      .brand{border-radius:22px;align-items:flex-start;flex-direction:column}
+      .source-grid,.topic-grid{grid-template-columns:1fr}
+      .card{padding:18px;border-radius:22px}
+      .source-card{min-height:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="brand-left">
+          <div class="logo">КТ</div>
+          <div>Үлгілік бағдарлама және ата-аналарды тарту</div>
+        </div>
+        <div class="brand-tags">
+          <span class="tag">№11 ресми құжат</span>
+          <span class="tag">№12 әдістемелік ұсыным</span>
+          <span class="tag">6-сайт</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">📘 6-сайт · ресми дереккөздер</div>
+          <h1>Үлгілік оқу бағдарламасы және ата-аналарды білім беру процесіне тарту</h1>
+          <p>
+            Бұл сайт екі ресми дереккөз бойынша жасалды: мектепке дейінгі тәрбие мен оқытудың
+            үлгілік оқу бағдарламасы және ата-аналарды тәрбиелеу-білім беру процесіне тарту
+            жөніндегі әдістемелік ұсынымдар.
+          </p>
+          <div class="hero-actions">
+            <a class="pill-link" href="#source11">№11 Үлгілік бағдарлама</a>
+            <a class="pill-link secondary" href="#source12">№12 Ата-аналарды тарту</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="stat">
+            <div class="stat-num">11</div>
+            <div>
+              <strong>Үлгілік оқу бағдарламасы</strong>
+              <span>Мақсат, міндет, мазмұн бағыттары, жас топтары, күтілетін нәтижелер</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">12</div>
+            <div>
+              <strong>Ата-аналарды тарту</strong>
+              <span>Отбасы мен балабақша серіктестігі, ата-аналармен жұмыс мазмұны</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">✓</div>
+            <div>
+              <strong>Бөлімдік тесттер</strong>
+              <span>Әр сұрақта 5 нұсқа, 1 дұрыс жауап, бөлім тақырыбы сақталады</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <h2 class="section-title">Ресми дереккөздер</h2>
+      <p class="section-subtitle">
+        6-сайт тек №11 және №12 ресми материалдарына сүйенеді. Басқа құжаттар бұл сайтқа қосылмайды.
+      </p>
+
+      <div class="source-grid">
+        <article class="source-card" onclick="document.getElementById('source11').scrollIntoView({behavior:'smooth'})">
+          <div>
+            <span class="badge">№11</span>
+            <h3>Мектепке дейінгі тәрбие мен оқытудың үлгілік оқу бағдарламасы</h3>
+            <p>
+              Бағдарламаның мақсаты, міндеттері, мазмұн бағыттары, жас топтары және күтілетін нәтижелер.
+            </p>
+          </div>
+          <div class="source-bottom"><span>Бөлімге өту</span><span class="arrow">→</span></div>
+        </article>
+
+        <article class="source-card" onclick="document.getElementById('source12').scrollIntoView({behavior:'smooth'})">
+          <div>
+            <span class="badge">№12</span>
+            <h3>Ата-аналарды тәрбиелеу-білім беру процесіне тарту</h3>
+            <p>
+              Отбасы мен мектепке дейінгі ұйымның серіктестігі, ата-аналармен жұмыс мазмұны және формалары.
+            </p>
+          </div>
+          <div class="source-bottom"><span>Бөлімге өту</span><span class="arrow">→</span></div>
+        </article>
+      </div>
+    </section>
+
+    <main class="study" id="study">
+      <aside class="side">
+        <div class="side-title">Жылдам өту</div>
+        <a href="#home">Басы</a>
+        <a href="#sources">Дереккөздер</a>
+        <a href="#source11">№11 Үлгілік бағдарлама</a>
+        <a href="#s11-1">1-бөлім</a>
+        <a href="#s11-2">2-бөлім</a>
+        <a href="#s11-3">3-бөлім</a>
+        <a href="#source12">№12 Ата-аналарды тарту</a>
+        <a href="#s12-1">4-бөлім</a>
+        <a href="#s12-2">5-бөлім</a>
+        <a href="#s12-3">6-бөлім</a>
+      </aside>
+
+      <div class="content">
+        <section id="source11">
+          <div class="source-title">
+            <h2>№11. Мектепке дейінгі тәрбие мен оқытудың үлгілік оқу бағдарламасы</h2>
+            <p>
+              Бұл ресми құжат мектепке дейінгі тәрбие мен оқытудың мақсатын, міндеттерін,
+              мазмұн бағыттарын, жас топтарын және балалардың күтілетін нәтижелерін анықтайды.
+            </p>
+          </div>
+
+          <article class="card" id="s11-1">
+            <h2 class="part-title">1-БӨЛІМ. БАҒДАРЛАМАНЫҢ МАҚСАТЫ, МІНДЕТТЕРІ ЖӘНЕ ЖАЛПЫ БАҒЫТЫ</h2>
+
+            <p class="lead">
+              Үлгілік оқу бағдарламасының негізгі бағыты — әр баланың қызығушылығы, ерекшелігі
+              және қажеттілігі ескерілген тұтас дамуын қамтамасыз ету. Бағдарлама оқыту, дамыту
+              және тәрбиелеу міндеттерінің бірлігін сақтайды.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Бағдарламаның мақсаты</strong>
+                <span>Жалпыадамзаттық және ұлттық құндылықтар негізінде әр баланың әлеуетін ашу және тұтас дамуын қамтамасыз ету.</span>
+              </div>
+              <div class="topic">
+                <strong>Қауіпсіз жағдай</strong>
+                <span>Баланың денсаулығын, қауіпсіздігін, эмоционалдық жайлылығын және даму қажеттіліктерін ескеретін орта құру.</span>
+              </div>
+              <div class="topic">
+                <strong>Дамытушы орта</strong>
+                <span>Баланың дербестігін, субъектілігін, қызығушылығын және белсенді әрекетін қолдайтын заттық-кеңістіктік орта.</span>
+              </div>
+              <div class="topic">
+                <strong>Құндылықтар</strong>
+                <span>Ұлттық құндылықтар, отбасы құндылықтары, патриотизм, әлеуметтік нормалар және мәдени дәстүрлер.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s11_1">
+              <div class="question" data-answer="B">
+                <div class="q-title">1. Үлгілік оқу бағдарламасының негізгі мақсаты қай жауапта дұрыс берілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_1" value="A"> Баланың жасына сай дағдыларын кезең-кезеңімен бақылау</label>
+                  <label class="option"><input type="radio" name="s11_1_1" value="B"> Әр баланың әлеуетін ашып, тұтас дамуын қамтамасыз ету</label>
+                  <label class="option"><input type="radio" name="s11_1_1" value="C"> Дамытушы ортаны баланың әрекетіне бейімдеп ұйымдастыру</label>
+                  <label class="option"><input type="radio" name="s11_1_1" value="D"> Оқыту мен тәрбиелеу міндеттерін бірізді жоспарлау</label>
+                  <label class="option"><input type="radio" name="s11_1_1" value="E"> Мектепке дейінгі ұйым мен отбасы байланысын нығайту</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Бағдарламаның мақсаты — әр баланың қызығушылығы, ерекшелігі мен қажеттілігін ескеріп, оның тұтас дамуы мен әлеуетін ашу.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">2. Бағдарлама міндеттеріндегі қауіпсіз білім беру жағдайы нені білдіреді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_2" value="A"> Баланың оқу әрекетін жас кезеңімен сәйкестендіруді</label>
+                  <label class="option"><input type="radio" name="s11_1_2" value="B"> Баланың дағдыларын мазмұн бағыттары бойынша дамытуды</label>
+                  <label class="option"><input type="radio" name="s11_1_2" value="C"> Баланың отбасы құндылықтарын меңгеруін қолдауды</label>
+                  <label class="option"><input type="radio" name="s11_1_2" value="D"> Баланың денсаулығы мен дамуына қолайлы орта жасауды</label>
+                  <label class="option"><input type="radio" name="s11_1_2" value="E"> Баланың мектепке дайындығын кешенді қалыптастыруды</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Қауіпсіз білім беру жағдайы баланың өмірін қорғауға, денсаулығын сақтауға, дамуына қолайлы және эмоционалдық жағынан жайлы орта жасауға бағытталады.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">3. Дамытушы заттық-кеңістіктік ортаның негізгі қызметі қайсы?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_3" value="A"> Баланың дербестігі мен белсенді әрекетін қолдау</label>
+                  <label class="option"><input type="radio" name="s11_1_3" value="B"> Баланың жас тобын мазмұн бағытымен бөлу</label>
+                  <label class="option"><input type="radio" name="s11_1_3" value="C"> Баланың күтілетін нәтижелерін жүйелеу</label>
+                  <label class="option"><input type="radio" name="s11_1_3" value="D"> Баланың әлеуметтік нормаларды қабылдауын бағалау</label>
+                  <label class="option"><input type="radio" name="s11_1_3" value="E"> Баланың мектепке өту кезеңін жеңілдету</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Дамытушы орта баланың дербестігін, субъектілігін, қызығушылығын, бастамасын және белсенді әрекетін қолдайды.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">4. Бағдарламада ұлттық құндылықтар қандай тәрбиелік мазмұнмен байланысады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_4" value="A"> Баланың жасына сай қимыл дағдыларын меңгеруімен</label>
+                  <label class="option"><input type="radio" name="s11_1_4" value="B"> Баланың тілдік қатынас пен сөздік қорын дамытуымен</label>
+                  <label class="option"><input type="radio" name="s11_1_4" value="C"> Баланың танымдық және зерттеу әрекетін қалыптастыруымен</label>
+                  <label class="option"><input type="radio" name="s11_1_4" value="D"> Баланың шығармашылық әрекетке қызығушылығын арттыруымен</label>
+                  <label class="option"><input type="radio" name="s11_1_4" value="E"> Баланың патриотизм, отбасы және мәдени дәстүрлерді қабылдауымен</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Ұлттық құндылықтар отбасы құндылықтарымен, патриотизммен, туған жерге сүйіспеншілікпен және мәдени дәстүрлермен байланысады.</div>
+              </div>
+
+              <div class="question" data-answer="C">
+                <div class="q-title">5. Оқыту, дамыту және тәрбиелеу міндеттерінің бірлігі нені білдіреді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_5" value="A"> Жас топтарының мазмұны бір бағытта беріледі</label>
+                  <label class="option"><input type="radio" name="s11_1_5" value="B"> Баланың жетістігі бір дағды арқылы анықталады</label>
+                  <label class="option"><input type="radio" name="s11_1_5" value="C"> Білім, даму және тәрбие өзара байланыста іске асады</label>
+                  <label class="option"><input type="radio" name="s11_1_5" value="D"> Дамытушы орта оқу міндетін толық алмастырады</label>
+                  <label class="option"><input type="radio" name="s11_1_5" value="E"> Отбасымен жұмыс барлық бөлімнен бөлек жүреді</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Бағдарламада білім беру, баланы дамыту және тәрбиелеу біртұтас педагогикалық процесс ретінде қарастырылады.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">6. Бағдарламадағы тең бастапқы мүмкіндік қағидасы қай мазмұнға жақын?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_1_6" value="A"> Баланың мектепке физикалық, психологиялық және әлеуметтік дайын болуына</label>
+                  <label class="option"><input type="radio" name="s11_1_6" value="B"> Баланың шығармашылық әрекетті өз қалауымен таңдауына</label>
+                  <label class="option"><input type="radio" name="s11_1_6" value="C"> Баланың отбасылық тәжірибесін балабақшада көрсетуіне</label>
+                  <label class="option"><input type="radio" name="s11_1_6" value="D"> Баланың күнделікті ойын әрекетін дербес жоспарлауына</label>
+                  <label class="option"><input type="radio" name="s11_1_6" value="E"> Баланың қоршаған ортамен зерттеу арқылы танысуына</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Тең бастапқы мүмкіндік баланың мектепте оқуға физикалық, психологиялық, эмоционалдық және әлеуметтік дайындығын қамтамасыз етумен байланысты.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s11_1')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s11_1')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s11_1"></div>
+            </div>
+          </article>
+                    <article class="card" id="s11-2">
+            <h2 class="part-title">2-БӨЛІМ. БАҒДАРЛАМАНЫҢ МАЗМҰН БАҒЫТТАРЫ ЖӘНЕ ЖАС ТОПТАРЫ</h2>
+
+            <p class="lead">
+              Бағдарлама мазмұны баланың жан-жақты дамуын қамтамасыз ететін бағыттардан тұрады:
+              физикалық даму, коммуникативтік дағдылар, танымдық және зияткерлік дағдылар,
+              шығармашылық дағдылар және әлеуметтік-эмоционалдық дағдылар. Мазмұн жас топтары
+              бойынша іске асырылады.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Физикалық даму</strong>
+                <span>Денсаулықты сақтау, қимыл белсенділігі, қауіпсіз мінез-құлық, салауатты өмір салты негіздері.</span>
+              </div>
+              <div class="topic">
+                <strong>Коммуникативтік дағдылар</strong>
+                <span>Ауызша сөйлеу, сөздік қор, қарым-қатынас, командада жұмыс жасау және ұсақ моторика.</span>
+              </div>
+              <div class="topic">
+                <strong>Танымдық дағдылар</strong>
+                <span>Зерттеу әрекеті, қоршаған ортамен өзара әрекет, қарапайым танымдық және зияткерлік қабілеттер.</span>
+              </div>
+              <div class="topic">
+                <strong>Шығармашылық дағдылар</strong>
+                <span>Өнерді қабылдау, эмоционалдық таным, дербес шығармашылық әрекетке жағдай жасау.</span>
+              </div>
+              <div class="topic">
+                <strong>Әлеуметтік-эмоционалдық дағдылар</strong>
+                <span>Әлеуметтену, отбасылық және қоғамдық дәстүрлер, рухани-адамгершілік құндылықтар.</span>
+              </div>
+              <div class="topic">
+                <strong>Жас топтары</strong>
+                <span>Ерте жас, кіші, ортаңғы, ересек және мектепалды топтар бойынша мазмұн бірізді беріледі.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s11_2">
+              <div class="question" data-answer="C">
+                <div class="q-title">1. Физикалық даму бағытының негізгі мазмұны қай жауапта дұрыс берілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_1" value="A"> Ауызша сөйлеу, сөздік қор және қарым-қатынас дағдылары</label>
+                  <label class="option"><input type="radio" name="s11_2_1" value="B"> Қоршаған ортаны зерттеу және танымдық әрекет дағдылары</label>
+                  <label class="option"><input type="radio" name="s11_2_1" value="C"> Денсаулық, қимыл белсенділігі және қауіпсіз өмір дағдылары</label>
+                  <label class="option"><input type="radio" name="s11_2_1" value="D"> Өнерді қабылдау және шығармашылық әрекет дағдылары</label>
+                  <label class="option"><input type="radio" name="s11_2_1" value="E"> Әлеуметтік нормалар мен отбасылық құндылықтар дағдылары</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Физикалық даму бағыты денсаулықты сақтауға, қимыл белсенділігіне, қауіпсіз мінез-құлық пен салауатты өмір салты негіздеріне бағытталады.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">2. Коммуникативтік дағдылар бағыты нені дамытуға бағытталады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_2" value="A"> Сөйлеу, сөздік қор, қарым-қатынас және командада әрекет ету</label>
+                  <label class="option"><input type="radio" name="s11_2_2" value="B"> Қимыл белсенділігі, денсаулық және қауіпсіздік әдеттері</label>
+                  <label class="option"><input type="radio" name="s11_2_2" value="C"> Зерттеу әрекеті, бақылау және қарапайым тәжірибе жасау</label>
+                  <label class="option"><input type="radio" name="s11_2_2" value="D"> Эстетикалық қабылдау, өнер және дербес шығармашылық</label>
+                  <label class="option"><input type="radio" name="s11_2_2" value="E"> Әлеуметтік қатынас, дәстүр және рухани құндылықтар</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Коммуникативтік дағдылар ауызша сөйлеуді, сөздік қорды, қарым-қатынасты және әртүрлі өмірлік жағдайда сөйлесуді қамтиды.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">3. Танымдық және зияткерлік дағдылар бағыты қай мазмұнмен байланысты?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_3" value="A"> Қимыл дағдысын меңгеру және қауіпсіз мінез-құлық сақтау</label>
+                  <label class="option"><input type="radio" name="s11_2_3" value="B"> Сөздік қорды кеңейту және сөйлеу мәдениетін дамыту</label>
+                  <label class="option"><input type="radio" name="s11_2_3" value="C"> Музыканы қабылдау және көркем әрекетке қызығу</label>
+                  <label class="option"><input type="radio" name="s11_2_3" value="D"> Қоршаған әлемді зерттеу және қарапайым танымдық әрекет</label>
+                  <label class="option"><input type="radio" name="s11_2_3" value="E"> Отбасылық дәстүрді қабылдау және қоғам нормаларын меңгеру</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Танымдық және зияткерлік дағдылар қоршаған ортамен өзара әрекетке, зерттеу әрекетіне, бақылауға және қарапайым танымдық қабілеттерге негізделеді.</div>
+              </div>
+
+              <div class="question" data-answer="B">
+                <div class="q-title">4. Шығармашылық дағдылар бағытының негізгі мазмұны қайсы?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_4" value="A"> Денсаулықты сақтау және қозғалыс белсенділігін дамыту</label>
+                  <label class="option"><input type="radio" name="s11_2_4" value="B"> Өнерді қабылдау және дербес шығармашылыққа жағдай жасау</label>
+                  <label class="option"><input type="radio" name="s11_2_4" value="C"> Қарым-қатынас жасау және сөйлеу дағдыларын дамыту</label>
+                  <label class="option"><input type="radio" name="s11_2_4" value="D"> Зерттеу әрекеті мен танымдық қабілеттерді қалыптастыру</label>
+                  <label class="option"><input type="radio" name="s11_2_4" value="E"> Әлеуметтік нормалар мен рухани құндылықтарды меңгерту</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Шығармашылық дағдылар бағыты өнерді қабылдауға, эмоционалдық танымға, шығармашылық белсенділікке және дербес әрекетке жағдай жасауға бағытталады.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">5. Әлеуметтік-эмоционалдық дағдылар бағыты қандай мазмұнды қамтиды?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_5" value="A"> Қимыл белсенділігі, денсаулық және қауіпсіздік мәдениеті</label>
+                  <label class="option"><input type="radio" name="s11_2_5" value="B"> Ауызша сөйлеу, сөздік қор және қарым-қатынас мәдениеті</label>
+                  <label class="option"><input type="radio" name="s11_2_5" value="C"> Қоршаған ортаны зерттеу және танымдық белсенділік</label>
+                  <label class="option"><input type="radio" name="s11_2_5" value="D"> Өнерді қабылдау және шығармашылық әрекетке қатысу</label>
+                  <label class="option"><input type="radio" name="s11_2_5" value="E"> Әлеуметтену, дәстүр, отбасы және рухани құндылықтар</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Әлеуметтік-эмоционалдық дағдылар баланың әлеуметтенуін, дәстүрлерді, отбасы құндылықтарын және қоғам нормаларын меңгеруін қамтиды.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">6. Жас топтарына бөлу қандай негізге сүйенеді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_6" value="A"> Балалардың физикалық және психикалық даму кезеңдеріне</label>
+                  <label class="option"><input type="radio" name="s11_2_6" value="B"> Балалардың сөйлеу және сөздік қор деңгейіне</label>
+                  <label class="option"><input type="radio" name="s11_2_6" value="C"> Балалардың шығармашылық әрекетке қызығуына</label>
+                  <label class="option"><input type="radio" name="s11_2_6" value="D"> Балалардың әлеуметтік тәжірибесі мен отбасы жағдайына</label>
+                  <label class="option"><input type="radio" name="s11_2_6" value="E"> Балалардың танымдық әрекеті мен зерттеу қабілетіне</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Бағдарлама мазмұны балалардың физикалық және психикалық даму кезеңдерін ескере отырып жас топтары бойынша іске асырылады.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">7. Мектепалды топтағы негізгі педагогикалық бағдар қай мазмұнмен байланысты?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_2_7" value="A"> Бейімделу, қарапайым әрекет және ересек қолдауы</label>
+                  <label class="option"><input type="radio" name="s11_2_7" value="B"> Негізгі қимылдар, сенсорика және қарапайым қатынас</label>
+                  <label class="option"><input type="radio" name="s11_2_7" value="C"> Ойын арқылы дербестік пен қарым-қатынасты дамыту</label>
+                  <label class="option"><input type="radio" name="s11_2_7" value="D"> Мектепке дайындық, өзін реттеу және әлеуметтік дайындық</label>
+                  <label class="option"><input type="radio" name="s11_2_7" value="E"> Бастама, бірлескен әрекет және шығармашылық белсенділік</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Мектепалды топта мектепке дайындық, өзін реттеу, танымдық белсенділік және әлеуметтік дайындық күшейеді.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s11_2')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s11_2')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s11_2"></div>
+            </div>
+          </article>
+
+          <article class="card" id="s11-3">
+            <h2 class="part-title">3-БӨЛІМ. ПЕДАГОГ ҮЙРЕТЕТІН ҚҰНДЫЛЫҚТАР МЕН ДАҒДЫЛАР</h2>
+
+            <p class="lead">
+              Бағдарламада педагог баланы дұрыс пен бұрысты түсінуге, сыпайы және мейірімді болуға,
+              дос болуға, көмектесуге, зерттеуге, тыңдауға, сөйлеуге, қауіпсіз мінез-құлық пен
+              салауатты әдеттерді сақтауға үйрететіні көрсетіледі.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Адамгершілік мінез-құлық</strong>
+                <span>Дұрыс пен бұрысты түсіну, сыпайылық, мейірімділік, достық, көмек, бөлісу.</span>
+              </div>
+              <div class="topic">
+                <strong>Танымдық белсенділік</strong>
+                <span>Қызығушылық таныту, қоршаған ортаны бақылау, зерттеу, сұрақ қою және тәжірибе жинау.</span>
+              </div>
+              <div class="topic">
+                <strong>Коммуникативтік мәдениет</strong>
+                <span>Тыңдау, түсіну, саналы сөйлеу, қарым-қатынас жасау және өз ойын жеткізу.</span>
+              </div>
+              <div class="topic">
+                <strong>Қауіпсіздік және денсаулық</strong>
+                <span>Қауіпсіз мінез-құлық ережелерін сақтау, денсаулыққа пайдалы әдеттер мен қимыл белсенділігін қолдау.</span>
+              </div>
+              <div class="topic">
+                <strong>Отбасы және туған жер</strong>
+                <span>Ата-ананы, достарды, туған өлкені жақсы көру, отбасын бағалау және қамқорлық көрсету.</span>
+              </div>
+              <div class="topic">
+                <strong>Дербестік және бастама</strong>
+                <span>Өзіне қамқор болу, көмек көрсету, бастама білдіру және жауапты әрекетке үйрену.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s11_3">
+              <div class="question" data-answer="C">
+                <div class="q-title">1. “Дұрыс” пен “бұрысты” түсіну қай дағдымен байланысты?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_1" value="A"> Қимыл белсенділігін сақтау дағдысымен</label>
+                  <label class="option"><input type="radio" name="s11_3_1" value="B"> Зерттеу әрекетін жүргізу дағдысымен</label>
+                  <label class="option"><input type="radio" name="s11_3_1" value="C"> Адамгершілік мінез-құлық дағдысымен</label>
+                  <label class="option"><input type="radio" name="s11_3_1" value="D"> Сөйлеу мәдениетін қалыптастыру дағдысымен</label>
+                  <label class="option"><input type="radio" name="s11_3_1" value="E"> Шығармашылық бастама білдіру дағдысымен</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Дұрыс пен бұрысты түсіну баланың адамгершілік мінез-құлқымен, әлеуметтік норма мен жауапты әрекетті қабылдауымен байланысты.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">2. Сыпайы және мейірімді болуға үйрету қай тәрбиелік мазмұнға жатады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_2" value="A"> Қарым-қатынас мәдениеті мен адамгершілік тәрбиеге</label>
+                  <label class="option"><input type="radio" name="s11_3_2" value="B"> Танымдық ізденіс пен зерттеу белсенділігіне</label>
+                  <label class="option"><input type="radio" name="s11_3_2" value="C"> Қимыл белсенділігі мен денсаулық әдеттеріне</label>
+                  <label class="option"><input type="radio" name="s11_3_2" value="D"> Дамытушы орта мен заттық әрекетке</label>
+                  <label class="option"><input type="radio" name="s11_3_2" value="E"> Шығармашылық қабылдау мен көркем әрекетке</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Сыпайылық пен мейірімділік баланың адамгершілік тәрбиесімен және қарым-қатынас мәдениетімен байланысты.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">3. “Бақылау және қоршаған ортаны зерттеу” қай бағыттағы әрекетті сипаттайды?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_3" value="A"> Қауіпсіз мінез-құлық әрекетін</label>
+                  <label class="option"><input type="radio" name="s11_3_3" value="B"> Коммуникативтік әрекетті</label>
+                  <label class="option"><input type="radio" name="s11_3_3" value="C"> Адамгершілік әрекетті</label>
+                  <label class="option"><input type="radio" name="s11_3_3" value="D"> Танымдық-зерттеушілік әрекетті</label>
+                  <label class="option"><input type="radio" name="s11_3_3" value="E"> Шығармашылық әрекетті</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Бақылау, зерттеу, қызығушылық таныту және қоршаған әлемді тану танымдық-зерттеушілік әрекетті сипаттайды.</div>
+              </div>
+
+              <div class="question" data-answer="B">
+                <div class="q-title">4. “Тыңдау, түсіну және саналы сөйлеу” қай дағдыны көрсетеді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_4" value="A"> Танымдық белсенділік дағдысын</label>
+                  <label class="option"><input type="radio" name="s11_3_4" value="B"> Коммуникативтік мәдениет дағдысын</label>
+                  <label class="option"><input type="radio" name="s11_3_4" value="C"> Қауіпсіздік мәдениеті дағдысын</label>
+                  <label class="option"><input type="radio" name="s11_3_4" value="D"> Дербестік және бастама дағдысын</label>
+                  <label class="option"><input type="radio" name="s11_3_4" value="E"> Отбасылық құндылық дағдысын</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Тыңдау, түсіну, сөйлеу және өз ойын жеткізу коммуникативтік мәдениетті қалыптастырумен байланысты.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">5. Қауіпсіз мінез-құлық пен салауатты әдеттер қай мазмұнға кіреді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_5" value="A"> Отбасы және туған жер құндылықтарына</label>
+                  <label class="option"><input type="radio" name="s11_3_5" value="B"> Коммуникативтік мәдениет мазмұнына</label>
+                  <label class="option"><input type="radio" name="s11_3_5" value="C"> Танымдық белсенділік мазмұнына</label>
+                  <label class="option"><input type="radio" name="s11_3_5" value="D"> Шығармашылық әрекет мазмұнына</label>
+                  <label class="option"><input type="radio" name="s11_3_5" value="E"> Денсаулық және қауіпсіздік мәдениетіне</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Қауіпсіз мінез-құлық ережелерін сақтау, салауатты әдеттер және қимыл белсенділігі денсаулық пен қауіпсіздік мәдениетіне кіреді.</div>
+              </div>
+
+              <div class="question" data-answer="C">
+                <div class="q-title">6. Ата-ананы, достарды және туған өлкені жақсы көру қандай құндылықпен байланысты?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s11_3_6" value="A"> Дамытушы орта құндылығымен</label>
+                  <label class="option"><input type="radio" name="s11_3_6" value="B"> Зерттеу әрекеті құндылығымен</label>
+                  <label class="option"><input type="radio" name="s11_3_6" value="C"> Отбасы және туған жер құндылығымен</label>
+                  <label class="option"><input type="radio" name="s11_3_6" value="D"> Қауіпсіздік мәдениеті құндылығымен</label>
+                  <label class="option"><input type="radio" name="s11_3_6" value="E"> Сөйлеу мәдениеті құндылығымен</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Ата-ананы, достарды, туған өлкені жақсы көру және отбасын бағалау отбасы мен туған жер құндылықтарымен байланысты.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s11_3')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s11_3')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s11_3"></div>
+            </div>
+          </article>
+        </section>
+                <section id="source12">
+          <div class="source-title">
+            <h2>№12. Ата-аналарды тәрбиелеу-білім беру процесіне тарту жөніндегі әдістемелік ұсынымдар</h2>
+            <p>
+              Бұл бөлім ата-аналарды мектепке дейінгі ұйымның тәрбиелеу-білім беру процесіне тартудың
+              теориялық негіздерін, отбасы мен ұйымның серіктестігін, ата-аналармен жұмыс формаларын
+              және педагогикалық қолдау мазмұнын қамтиды.
+            </p>
+          </div>
+
+          <article class="card" id="s12-1">
+            <h2 class="part-title">4-БӨЛІМ. АТА-АНАЛАРДЫ ТАРТУДЫҢ ТЕОРИЯЛЫҚ НЕГІЗДЕРІ</h2>
+
+            <p class="lead">
+              Отбасы мен мектепке дейінгі ұйым — баланың ерте жастағы әлеуметтенуіндегі маңызды
+              институттар. Олардың тәрбиелік қызметі әртүрлі болғанымен, баланың жан-жақты дамуы үшін
+              өзара байланысы мен серіктестігі қажет.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Отбасының рөлі</strong>
+                <span>Отбасы баланың алғашқы тәрбиелік ортасы, құндылықтарды, қарым-қатынас үлгілерін және мінез-құлық нормаларын қалыптастырады.</span>
+              </div>
+              <div class="topic">
+                <strong>Мектепке дейінгі ұйымның рөлі</strong>
+                <span>Ұйым баланың дамуына жүйелі педагогикалық жағдай жасап, ата-анамен бірлескен әрекетті ұйымдастырады.</span>
+              </div>
+              <div class="topic">
+                <strong>Серіктестік</strong>
+                <span>Отбасы мен ұйымның ортақ мақсаты, өзара сенімі, келісілген әрекеті және бала мүддесіне бағытталуы.</span>
+              </div>
+              <div class="topic">
+                <strong>Ата-аналарды тарту</strong>
+                <span>Ата-аналардың тәрбиелеу-білім беру процесіне белсенді қатысуын және педагогикалық мәдениетін арттыру.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s12_1">
+              <div class="question" data-answer="B">
+                <div class="q-title">1. Ата-аналарды тәрбиелеу-білім беру процесіне тартудың негізгі мәні қайсы?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_1_1" value="A"> Ата-ананың балабақшадағы іс-шараларға қатысуын тіркеу</label>
+                  <label class="option"><input type="radio" name="s12_1_1" value="B"> Отбасы мен ұйымның бала дамуына ортақ ықпалын күшейту</label>
+                  <label class="option"><input type="radio" name="s12_1_1" value="C"> Ата-ананың педагогикалық ақпаратты жүйелі қабылдауын бақылау</label>
+                  <label class="option"><input type="radio" name="s12_1_1" value="D"> Отбасымен байланыс формаларын жоспар бойынша өткізу</label>
+                  <label class="option"><input type="radio" name="s12_1_1" value="E"> Балабақша жұмысын ата-аналарға ашық түрде көрсету</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Ата-аналарды тартудың негізгі мәні — отбасы мен мектепке дейінгі ұйымның бала дамуына бірлескен, келісілген және тұрақты ықпалын күшейту.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">2. Отбасы баланың дамуында қандай бастапқы қызмет атқарады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_1_2" value="A"> Педагогикалық ақпаратты қабылдайтын орта қызметін</label>
+                  <label class="option"><input type="radio" name="s12_1_2" value="B"> Ұйыммен байланыс формаларын таңдаушы қызметін</label>
+                  <label class="option"><input type="radio" name="s12_1_2" value="C"> Балабақша іс-шараларын қолдаушы қызметін</label>
+                  <label class="option"><input type="radio" name="s12_1_2" value="D"> Алғашқы тәрбие мен әлеуметтену ортасы қызметін</label>
+                  <label class="option"><input type="radio" name="s12_1_2" value="E"> Педагогикалық кеңес алушы орта қызметін</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Отбасы бала үшін алғашқы тәрбие ортасы болып, құндылықтарды, мінез-құлық үлгілерін және қарым-қатынас тәжірибесін қалыптастырады.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">3. Мектепке дейінгі ұйым мен отбасы серіктестігі қандай шартқа сүйенеді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_1_3" value="A"> Ортақ мақсат, өзара сенім және келісілген әрекетке</label>
+                  <label class="option"><input type="radio" name="s12_1_3" value="B"> Ақпарат беру, хабарландыру және есеп жүргізуге</label>
+                  <label class="option"><input type="radio" name="s12_1_3" value="C"> Жиналыс өткізу, кеңес беру және бақылауға</label>
+                  <label class="option"><input type="radio" name="s12_1_3" value="D"> Іс-шара ұйымдастыру, қатысуды белгілеу және талдауға</label>
+                  <label class="option"><input type="radio" name="s12_1_3" value="E"> Ата-ананың сұранысын жинау және қорытынды жасауға</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Серіктестік ортақ мақсатқа, өзара сенімге, құрметке, келісілген әрекетке және бала мүддесіне бағытталуға сүйенеді.</div>
+              </div>
+
+              <div class="question" data-answer="C">
+                <div class="q-title">4. Ата-аналарды тарту педагогикалық мәдениетпен қалай байланысады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_1_4" value="A"> Ата-ананың қатысу уақытын белгілеу арқылы</label>
+                  <label class="option"><input type="radio" name="s12_1_4" value="B"> Ата-ананың іс-шараға келуін есептеу арқылы</label>
+                  <label class="option"><input type="radio" name="s12_1_4" value="C"> Ата-ананың тәрбие туралы түсінігін кеңейту арқылы</label>
+                  <label class="option"><input type="radio" name="s12_1_4" value="D"> Ата-ананың ұйым құжаттарымен танысуы арқылы</label>
+                  <label class="option"><input type="radio" name="s12_1_4" value="E"> Ата-ананың топтағы ақпаратты көруі арқылы</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Ата-аналарды тарту олардың бала тәрбиесі, даму ерекшелігі және үйдегі қолдау тәсілдері туралы түсінігін кеңейтіп, педагогикалық мәдениетін арттырады.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">5. Отбасы мен ұйым байланысының баланың дамуына әсері қай жауапта дұрыс берілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_1_5" value="A"> Тәрбие жұмысының есептік көрсеткішін арттырады</label>
+                  <label class="option"><input type="radio" name="s12_1_5" value="B"> Ата-аналар жиналысының мазмұнын кеңейтеді</label>
+                  <label class="option"><input type="radio" name="s12_1_5" value="C"> Балабақшадағы іс-шара санын көбейтеді</label>
+                  <label class="option"><input type="radio" name="s12_1_5" value="D"> Ақпараттық бұрыштардың мазмұнын толықтырады</label>
+                  <label class="option"><input type="radio" name="s12_1_5" value="E"> Тәрбиелік ықпалдың үйлесімділігі мен тұрақтылығын күшейтеді</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Отбасы мен ұйым байланысы балаға берілетін тәрбиелік ықпалдың бірізді, үйлесімді және тұрақты болуына мүмкіндік береді.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s12_1')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s12_1')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s12_1"></div>
+            </div>
+          </article>
+
+          <article class="card" id="s12-2">
+            <h2 class="part-title">5-БӨЛІМ. АТА-АНАЛАРМЕН ЖҰМЫС БАҒЫТТАРЫ ЖӘНЕ ФОРМАЛАРЫ</h2>
+
+            <p class="lead">
+              Ата-аналармен жұмыс ақпараттандыру, кеңес беру, бірлескен іс-шаралар, ата-аналар клубы,
+              тренинг, сауалнама, ашық есік күні, педагогикалық жағдаяттарды талдау және тәжірибе
+              алмасу арқылы ұйымдастырылады.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Ақпараттық жұмыс</strong>
+                <span>Ата-аналарға баланың дамуы, ұйым жұмысы, тәрбие мазмұны және күнделікті қолдау жолдары туралы мәлімет беру.</span>
+              </div>
+              <div class="topic">
+                <strong>Кеңес беру</strong>
+                <span>Баланың жас ерекшелігі, мінез-құлқы, даму қажеттілігі және отбасындағы тәрбие мәселелері бойынша педагогикалық қолдау.</span>
+              </div>
+              <div class="topic">
+                <strong>Бірлескен іс-шаралар</strong>
+                <span>Ата-ана, бала және педагог қатысатын мерекелер, жобалар, ойындар, шеберлік сабақтары, шығармашылық кездесулер.</span>
+              </div>
+              <div class="topic">
+                <strong>Ата-аналар клубы</strong>
+                <span>Тәжірибе алмасуға, сұрақ талқылауға, педагогикалық мәдениетті арттыруға бағытталған тұрақты жұмыс формасы.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s12_2">
+              <div class="question" data-answer="A">
+                <div class="q-title">1. Ақпараттық жұмыс ата-аналармен серіктестікте қандай қызмет атқарады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_1" value="A"> Баланың дамуы мен ұйым жұмысы туралы мәлімет береді</label>
+                  <label class="option"><input type="radio" name="s12_2_1" value="B"> Ата-ананың тәрбие тәжірибесін бірлесіп талдайды</label>
+                  <label class="option"><input type="radio" name="s12_2_1" value="C"> Отбасымен педагогикалық жағдаяттарды шешеді</label>
+                  <label class="option"><input type="radio" name="s12_2_1" value="D"> Ата-ананы іс-шараға тікелей қатыстыруды ұйымдастырады</label>
+                  <label class="option"><input type="radio" name="s12_2_1" value="E"> Отбасының қажеттілігін анықтау үшін дерек жинайды</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Ақпараттық жұмыс ата-аналарға баланың дамуы, топ өмірі, тәрбие мазмұны және үйдегі қолдау жолдары туралы мәлімет беруге бағытталады.</div>
+              </div>
+
+              <div class="question" data-answer="C">
+                <div class="q-title">2. Кеңес беру жұмысының негізгі мазмұны қай жауапта дұрыс көрсетілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_2" value="A"> Ата-аналарға ұйым жаңалықтарын тұрақты хабарлау</label>
+                  <label class="option"><input type="radio" name="s12_2_2" value="B"> Ата-аналарды мерекелік іс-шараларға тарту</label>
+                  <label class="option"><input type="radio" name="s12_2_2" value="C"> Бала тәрбиесі мен дамуы бойынша педагогикалық қолдау көрсету</label>
+                  <label class="option"><input type="radio" name="s12_2_2" value="D"> Ата-аналар арасында тәжірибе алмасу алаңын құру</label>
+                  <label class="option"><input type="radio" name="s12_2_2" value="E"> Отбасының сұранысын сауалнама арқылы анықтау</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Кеңес беру ата-аналарға баланың жас ерекшелігі, мінез-құлқы, даму қажеттілігі және отбасындағы тәрбие мәселелері бойынша педагогикалық қолдау көрсетеді.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">3. Бірлескен іс-шаралардың ата-аналарды тартудағы мәні неде?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_3" value="A"> Ата-аналарға ақпаратты жүйелі түрде жеткізуінде</label>
+                  <label class="option"><input type="radio" name="s12_2_3" value="B"> Отбасылық тәрбие тәжірибесін жеке талдауында</label>
+                  <label class="option"><input type="radio" name="s12_2_3" value="C"> Ата-ананың сұранысын алдын ала анықтауында</label>
+                  <label class="option"><input type="radio" name="s12_2_3" value="D"> Педагогикалық кеңесті жеке форматта беруінде</label>
+                  <label class="option"><input type="radio" name="s12_2_3" value="E"> Ата-ана, бала және педагогтың ортақ әрекетін ұйымдастыруында</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Бірлескен іс-шаралар ата-ана, бала және педагогтың ортақ әрекетін ұйымдастырып, серіктестікті нақты тәжірибе арқылы күшейтеді.</div>
+              </div>
+
+              <div class="question" data-answer="B">
+                <div class="q-title">4. Ата-аналар клубы қандай мақсатқа бағытталады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_4" value="A"> Ұйым жұмысы туралы қысқа хабарлама беруге</label>
+                  <label class="option"><input type="radio" name="s12_2_4" value="B"> Тәжірибе алмасу мен педагогикалық мәдениетті арттыруға</label>
+                  <label class="option"><input type="radio" name="s12_2_4" value="C"> Жеке кеңес беру арқылы мәселені нақтылауға</label>
+                  <label class="option"><input type="radio" name="s12_2_4" value="D"> Ата-ананың қатысуын ресми түрде тіркеуге</label>
+                  <label class="option"><input type="radio" name="s12_2_4" value="E"> Баланың даму нәтижесін құжат бойынша салыстыруға</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Ата-аналар клубы тәжірибе алмасуға, өзекті мәселелерді талқылауға, педагогикалық мәдениетті арттыруға және серіктестікті нығайтуға бағытталады.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">5. Сауалнама ата-аналармен жұмыста қандай қызмет атқарады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_5" value="A"> Ата-аналарға тәрбие туралы кеңес береді</label>
+                  <label class="option"><input type="radio" name="s12_2_5" value="B"> Ата-аналарды іс-шараға қатыстыруды ұйымдастырады</label>
+                  <label class="option"><input type="radio" name="s12_2_5" value="C"> Отбасылық тәжірибені ортақ талқылауға шығарады</label>
+                  <label class="option"><input type="radio" name="s12_2_5" value="D"> Отбасының сұранысы мен қажеттілігін анықтайды</label>
+                  <label class="option"><input type="radio" name="s12_2_5" value="E"> Педагогикалық ақпаратты көрнекі түрде ұсынады</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Сауалнама ата-аналардың сұранысын, қажеттілігін, көзқарасын және бала тәрбиесіне қатысты қиындықтарын анықтауға көмектеседі.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">6. Ашық есік күні ата-аналармен жұмыста қандай мүмкіндік береді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_2_6" value="A"> Ұйымдағы тәрбие процесін тікелей көруге мүмкіндік береді</label>
+                  <label class="option"><input type="radio" name="s12_2_6" value="B"> Отбасылық қиындықты жеке талдауға мүмкіндік береді</label>
+                  <label class="option"><input type="radio" name="s12_2_6" value="C"> Ата-аналар тәжірибесін топта салыстыруға мүмкіндік береді</label>
+                  <label class="option"><input type="radio" name="s12_2_6" value="D"> Баланың даму картасын бірге толтыруға мүмкіндік береді</label>
+                  <label class="option"><input type="radio" name="s12_2_6" value="E"> Педагогикалық әдебиетті бірлесіп таңдауға мүмкіндік береді</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Ашық есік күні ата-аналарға мектепке дейінгі ұйымдағы тәрбие-білім беру процесін және баланың ортадағы әрекетін тікелей көруге мүмкіндік береді.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s12_2')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s12_2')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s12_2"></div>
+            </div>
+          </article>
+                    <article class="card" id="s12-3">
+            <h2 class="part-title">6-БӨЛІМ. ОТБАСЫ МЕН МЕКТЕПКЕ ДЕЙІНГІ ҰЙЫМ СЕРІКТЕСТІГІНІҢ НӘТИЖЕСІ</h2>
+
+            <p class="lead">
+              Ата-аналарды тарту нәтижесінде бала тәрбиесіндегі ортақ ұстаным қалыптасады,
+              ата-аналардың педагогикалық құзыреттілігі артады, балаға берілетін тәрбиелік ықпал
+              үйлесімді болады және мектепке дейінгі ұйым ашық серіктестік алаңына айналады.
+            </p>
+
+            <div class="topic-grid">
+              <div class="topic">
+                <strong>Ортақ ұстаным</strong>
+                <span>Отбасы мен ұйым бала тәрбиесіне қатысты келісілген мақсат, талап және қолдау тәсілдерін ұстанады.</span>
+              </div>
+              <div class="topic">
+                <strong>Педагогикалық құзыреттілік</strong>
+                <span>Ата-аналардың бала дамуы, жас ерекшелігі және тәрбие тәсілдері туралы түсінігі кеңейеді.</span>
+              </div>
+              <div class="topic">
+                <strong>Ашық серіктестік</strong>
+                <span>Ұйым ата-аналармен сенімге, құрметке және ақпараттық ашықтыққа негізделген байланыс орнатады.</span>
+              </div>
+              <div class="topic">
+                <strong>Балаға ықпал</strong>
+                <span>Бала отбасында да, балабақшада да бірізді қолдау мен үйлесімді тәрбие алады.</span>
+              </div>
+            </div>
+
+            <div class="test-box" data-test="s12_3">
+              <div class="question" data-answer="D">
+                <div class="q-title">1. Отбасы мен ұйым серіктестігінің негізгі нәтижесі қай жауапта дұрыс берілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_1" value="A"> Ата-аналар жиналысының тұрақты өткізілуі</label>
+                  <label class="option"><input type="radio" name="s12_3_1" value="B"> Ақпараттық материалдардың жүйелі жаңаруы</label>
+                  <label class="option"><input type="radio" name="s12_3_1" value="C"> Іс-шараларға қатысушылар санының көбеюі</label>
+                  <label class="option"><input type="radio" name="s12_3_1" value="D"> Бала тәрбиесіндегі ортақ ұстанымның қалыптасуы</label>
+                  <label class="option"><input type="radio" name="s12_3_1" value="E"> Кеңес беру жұмысының жоспарға сай жүргізілуі</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Серіктестіктің басты нәтижесі — отбасы мен мектепке дейінгі ұйымның бала тәрбиесіне қатысты ортақ ұстаным, келісілген талап және бірізді қолдау қалыптастыруы.</div>
+              </div>
+
+              <div class="question" data-answer="B">
+                <div class="q-title">2. Ата-аналардың педагогикалық құзыреттілігі қалай көрінеді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_2" value="A"> Ұйымдағы хабарландыруларды тұрақты оқуы арқылы</label>
+                  <label class="option"><input type="radio" name="s12_3_2" value="B"> Баланың дамуы мен тәрбиесін саналы қолдауы арқылы</label>
+                  <label class="option"><input type="radio" name="s12_3_2" value="C"> Ата-аналар жиналысына уақытылы келуі арқылы</label>
+                  <label class="option"><input type="radio" name="s12_3_2" value="D"> Іс-шараларға қатысу кестесін сақтауы арқылы</label>
+                  <label class="option"><input type="radio" name="s12_3_2" value="E"> Педагогикалық ақпаратты жазып алуы арқылы</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Педагогикалық құзыреттілік ата-ананың баланың жас ерекшелігін түсінуінен, тәрбие тәсілдерін саналы қолдануынан және дамуын қолдауынан көрінеді.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">3. Ашық серіктестік қандай қатынасқа негізделеді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_3" value="A"> Ақпаратты біржақты жеткізуге және есеп беруге</label>
+                  <label class="option"><input type="radio" name="s12_3_3" value="B"> Жиналыстарды жоспарлау мен қатысуды белгілеуге</label>
+                  <label class="option"><input type="radio" name="s12_3_3" value="C"> Іс-шара мазмұнын педагогтің толық басқаруына</label>
+                  <label class="option"><input type="radio" name="s12_3_3" value="D"> Ата-аналардың сұрақтарын тек кеңес арқылы шешуге</label>
+                  <label class="option"><input type="radio" name="s12_3_3" value="E"> Сенімге, құрметке және өзара ақпарат алмасуға</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. Ашық серіктестік өзара сенімге, құрметке, ақпараттық ашықтыққа және бала мүддесі үшін бірлесіп әрекет етуге негізделеді.</div>
+              </div>
+
+              <div class="question" data-answer="A">
+                <div class="q-title">4. Балаға берілетін тәрбиелік ықпалдың үйлесімділігі нені білдіреді?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_4" value="A"> Отбасы мен балабақша талаптарының бірізді болуын</label>
+                  <label class="option"><input type="radio" name="s12_3_4" value="B"> Ата-аналарға ақпараттың жиі ұсынылуын</label>
+                  <label class="option"><input type="radio" name="s12_3_4" value="C"> Іс-шаралардың түрлі формада өткізілуін</label>
+                  <label class="option"><input type="radio" name="s12_3_4" value="D"> Кеңес беру мазмұнының жеке жоспарлануын</label>
+                  <label class="option"><input type="radio" name="s12_3_4" value="E"> Жиналыс қорытындысының жазбаша берілуін</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: A. Үйлесімді ықпал отбасы мен балабақша талаптарының, құндылықтарының және қолдау тәсілдерінің балаға бірізді берілуін білдіреді.</div>
+              </div>
+
+              <div class="question" data-answer="C">
+                <div class="q-title">5. Ата-аналарды тарту жұмысының тиімділігі қандай белгімен анықталады?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_5" value="A"> Ақпараттық бұрыш материалдарының көптігімен</label>
+                  <label class="option"><input type="radio" name="s12_3_5" value="B"> Жиналыс пен кеңес санының артуымен</label>
+                  <label class="option"><input type="radio" name="s12_3_5" value="C"> Ата-ананың бала дамуына саналы қатысуымен</label>
+                  <label class="option"><input type="radio" name="s12_3_5" value="D"> Іс-шаралардың мерекелік сипат алуымен</label>
+                  <label class="option"><input type="radio" name="s12_3_5" value="E"> Құжаттардың уақытылы толтырылуымен</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: C. Тиімділік ата-ананың бала дамуына саналы қатысуымен, серіктестікке белсенді араласуымен және үйдегі тәрбиелік қолдаудың күшеюімен анықталады.</div>
+              </div>
+
+              <div class="question" data-answer="D">
+                <div class="q-title">6. Серіктестік нәтижесін бағалауда қандай көрсеткіш маңызды?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_6" value="A"> Ата-аналарға берілген хабарландыру саны</label>
+                  <label class="option"><input type="radio" name="s12_3_6" value="B"> Өткізілген жиналыстардың жалпы жиілігі</label>
+                  <label class="option"><input type="radio" name="s12_3_6" value="C"> Топтағы көрнекі материалдардың толықтығы</label>
+                  <label class="option"><input type="radio" name="s12_3_6" value="D"> Отбасы мен ұйым әрекетінің бала мүддесіне сәйкестігі</label>
+                  <label class="option"><input type="radio" name="s12_3_6" value="E"> Кеңес беру тақырыптарының жоспарға енгізілуі</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: D. Серіктестік нәтижесін бағалауда отбасы мен ұйым әрекетінің баланың дамуына, қауіпсіздігіне, тәрбиесіне және әл-ауқатына сәйкестігі маңызды.</div>
+              </div>
+
+              <div class="question" data-answer="B">
+                <div class="q-title">7. Ата-аналармен серіктестіктің ұзақ мерзімді әсері қай жауапта дұрыс берілген?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_7" value="A"> Ұйымдағы ақпараттық жұмыс түрлері көбейеді</label>
+                  <label class="option"><input type="radio" name="s12_3_7" value="B"> Балаға тұрақты, келісілген тәрбиелік орта қалыптасады</label>
+                  <label class="option"><input type="radio" name="s12_3_7" value="C"> Ата-аналар жиналысының мазмұны кеңейеді</label>
+                  <label class="option"><input type="radio" name="s12_3_7" value="D"> Педагогикалық құжаттар жүйелі жүргізіледі</label>
+                  <label class="option"><input type="radio" name="s12_3_7" value="E"> Іс-шаралардың ұйымдастырылуы жеңілдейді</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: B. Ұзақ мерзімді әсері — балаға отбасында да, мектепке дейінгі ұйымда да тұрақты, келісілген және қолдаушы тәрбиелік орта қалыптасуы.</div>
+              </div>
+
+              <div class="question" data-answer="E">
+                <div class="q-title">8. №12 әдістемелік ұсынымның жалпы педагогикалық бағыты қай жауапта жинақталған?</div>
+                <div class="options">
+                  <label class="option"><input type="radio" name="s12_3_8" value="A"> Ата-аналарды ақпараттандыру және жиналыс өткізу</label>
+                  <label class="option"><input type="radio" name="s12_3_8" value="B"> Отбасылық тәжірибені бақылау және кеңес беру</label>
+                  <label class="option"><input type="radio" name="s12_3_8" value="C"> Педагогикалық құжаттарды жүйелеу және талдау</label>
+                  <label class="option"><input type="radio" name="s12_3_8" value="D"> Іс-шараларды жоспарлау және ата-ананы шақыру</label>
+                  <label class="option"><input type="radio" name="s12_3_8" value="E"> Отбасы мен ұйым серіктестігі арқылы бала дамуын қолдау</label>
+                </div>
+                <div class="explanation">Дұрыс жауап: E. №12 әдістемелік ұсынымның жалпы бағыты — ата-аналарды тәрбиелеу-білім беру процесіне тартып, отбасы мен мектепке дейінгі ұйым серіктестігі арқылы бала дамуын қолдау.</div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" onclick="checkTest('s12_3')">Жауаптарды тексеру</button>
+                <button class="btn secondary" onclick="resetTest('s12_3')">Қайта тапсыру</button>
+              </div>
+              <div class="score" id="score-s12_3"></div>
+            </div>
+          </article>
+        </section>
+
+        <footer class="section">
+          <div class="card">
+            <h2>Қорытынды</h2>
+            <p>
+              Бұл сайт мектепке дейінгі тәрбие мен оқытудың үлгілік оқу бағдарламасын және
+              ата-аналарды тәрбиелеу-білім беру процесіне тарту жөніндегі әдістемелік ұсынымдарды
+              КТ-ға дайындық форматында қайталауға арналған.
+            </p>
+
+            <div class="copyright">
+              © Назерке. Барлық құқық қорғалған. Материалды рұқсатсыз көшіруге, сатуға,
+              қайта таратуға немесе коммерциялық мақсатта қолдануға болмайды.
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function checkTest(testId) {
+      const test = document.querySelector('[data-test="' + testId + '"]');
+      const scoreBox = document.getElementById("score-" + testId);
+
+      if (!test || !scoreBox) return;
+
+      const questions = test.querySelectorAll(".question");
+      let correct = 0;
+
+      questions.forEach(question => {
+        const answer = question.dataset.answer;
+        const selected = question.querySelector('input[type="radio"]:checked');
+
+        question.classList.remove("correct", "wrong");
+        question.classList.add("checked");
+
+        if (selected && selected.value === answer) {
+          correct++;
+          question.classList.add("correct");
+        } else {
+          question.classList.add("wrong");
+        }
+      });
+
+      const total = questions.length;
+      const percent = total ? Math.round((correct / total) * 100) : 0;
+
+      let level = "";
+      if (percent >= 90) {
+        level = "Өте жоғары нәтиже";
+      } else if (percent >= 75) {
+        level = "Жақсы нәтиже";
+      } else if (percent >= 50) {
+        level = "Орташа нәтиже";
+      } else {
+        level = "Қайталау қажет";
+      }
+
+      scoreBox.style.display = "block";
+      scoreBox.textContent = "Нәтиже: " + correct + "/" + total + " дұрыс жауап · " + percent + "% · " + level;
+      scoreBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function resetTest(testId) {
+      const test = document.querySelector('[data-test="' + testId + '"]');
+      const scoreBox = document.getElementById("score-" + testId);
+
+      if (!test) return;
+
+      const questions = test.querySelectorAll(".question");
+
+      questions.forEach(question => {
+        question.classList.remove("correct", "wrong", "checked");
+
+        const inputs = question.querySelectorAll('input[type="radio"]');
+        inputs.forEach(input => {
+          input.checked = false;
+        });
+      });
+
+      if (scoreBox) {
+        scoreBox.style.display = "none";
+        scoreBox.textContent = "";
+      }
+
+      test.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  </script>
+</body>
+</html>
