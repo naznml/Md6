@@ -402,6 +402,20 @@
     .question.correct{border-color:rgba(47,143,122,.45);background:rgba(235,249,245,.72)}
     .question.wrong{border-color:rgba(196,73,73,.42);background:rgba(255,239,239,.72)}
 
+    .option.correct-choice{
+      border-color:rgba(47,143,122,.72);
+      background:#e8f7f2;
+      color:#206b5a;
+      font-weight:900;
+    }
+
+    .option.wrong-choice{
+      border-color:rgba(196,73,73,.65);
+      background:#fff0f0;
+      color:#9f3434;
+      font-weight:900;
+    }
+
     .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 
     .btn{
@@ -1309,6 +1323,21 @@
         question.classList.remove("correct", "wrong");
         question.classList.add("checked");
 
+        question.querySelectorAll(".option").forEach(option => {
+          option.classList.remove("correct-choice", "wrong-choice");
+
+          const input = option.querySelector('input[type="radio"]');
+          if (!input) return;
+
+          if (input.value === answer) {
+            option.classList.add("correct-choice");
+          }
+
+          if (selected && input.checked && input.value !== answer) {
+            option.classList.add("wrong-choice");
+          }
+        });
+
         if (selected && selected.value === answer) {
           correct++;
           question.classList.add("correct");
@@ -1346,6 +1375,10 @@
 
       questions.forEach(question => {
         question.classList.remove("correct", "wrong", "checked");
+
+        question.querySelectorAll(".option").forEach(option => {
+          option.classList.remove("correct-choice", "wrong-choice");
+        });
 
         const inputs = question.querySelectorAll('input[type="radio"]');
         inputs.forEach(input => {
